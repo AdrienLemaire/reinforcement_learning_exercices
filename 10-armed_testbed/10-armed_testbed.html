@@ -1,0 +1,146 @@
+
+
+
+
+
+
+
+ <h2><a name="tth_sEc1">
+1</a>&nbsp;&nbsp;Problem</h2>
+
+<div class="p"><!----></div>
+
+<blockquote>Consider the following learning problem. You are faced repeatedly with a choice
+among n different options, or actions. After each choice you receive a numerical
+reward chosen from a stationary probability distribution that depends on the
+action you selected. Your objective is to maximize the expected total reward over
+some time period, for example, over 1000 action selections. Each action
+selection is called a play.
+
+<div class="p"><!----></div>
+This is the original form of the <i>n-armed bandit problem</i>, so named by
+analogy to a slot machine, or &#246;ne-armed bandit", except that it has n levers
+instead of one.
+</blockquote>
+
+<div align="right">
+    <b>Reinforcement Learning</b>, by <i>Richard S. Sutton</i> and
+    <i>Andrew G. Barto</i>
+</div>
+
+<div class="p"><!----></div>
+This problem will be solved with the following values:
+
+<ul>
+<li> The bandit has 10 levers (10 actions).
+<div class="p"><!----></div>
+</li>
+
+<li> We will play 1000 times on a Bandit.
+<div class="p"><!----></div>
+</li>
+
+<li> We will repeat the same game 2000 times and average the results.
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+Now, let's consider the following statements:
+
+<div class="p"><!----></div>
+
+<ul>
+<li> Choose among n different actions repeatedly.
+<div class="p"><!----></div>
+</li>
+
+<li> Each lever gives a reward calculated from a
+      <a href="http://en.wikipedia.org/wiki/Normal_distribution">normal distribution N(0,1)</a>.
+<div class="p"><!----></div>
+</li>
+
+<li> Each action has an optimal value, not known by the program.
+<div class="p"><!----></div>
+</li>
+
+<li> Each action has an estimated value, which is the average of received
+      item rewards at a given time.
+<div class="p"><!----></div>
+</li>
+
+<li> A greedy action is the action whose estimated value is the greatest.
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+At the beginning of the game, we don't know anything. What are the rewards given
+for each lever ? We will then give to all actions the estimated value 0
+at the beginning.
+
+<div class="p"><!----></div>
+If an action always gave the same reward, then the solution would be extremely
+simple: after discovering each action's value, choose the highest one and only
+play it.
+
+<div class="p"><!----></div>
+But here, things are more subtile.
+Let's call <i>Q</i><span class="roman">*</span><span class="roman">(</span><span class="roman">a</span><span class="roman">)</span> the true value of the action a,
+and <i>Q</i><i>t</i>(<i>a</i>) the estimated value of the action a
+at the t<span class="roman">th play.
+
+<div class="p"><!----></div>
+At each time t, the average reward for an action a will be:
+
+<br clear="all" /><table border="0" width="100%"><tr><td>
+<table align="center" cellspacing="0"  cellpadding="2"><tr><td nowrap="nowrap" align="center">
+ <i>Qt</i>(<i>a</i>) = </td><td nowrap="nowrap" align="center">
+<i>r</i>1 + <i>r</i>2 + ... + <i>r</i><i><i>k</i></i><i><i><i>a</i></i></i>
+<div class="hrcomp"><hr noshade="noshade" size="1"/></div><i>k</i><i><i>a</i></i><br /></td><td nowrap="nowrap" align="center">
+</td></tr></table>
+</td><td width="1%">(1)</td></tr></table>
+
+
+
+<div class="p"><!----></div>
+ <h2><a name="tth_sEc2">
+2</a>&nbsp;&nbsp;Result</h2>
+
+<div class="p"><!----></div>
+After 3 hours of computation (could have been faster, but I was doing some other
+stuff in the same time, so it didn't get 100% of the cpu allocated.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg1">
+</a>     <center>    <img src="average_rewards.png" alt="average_rewards.png" />
+    
+<center>Figure 1: Average rewards for 2000 Bandits</center>
+</center>
+<div class="p"><!----></div>
+This graph shows that a greedy play will get an average reward of 1.0, when
+e-greedy plays are able to get a much better result. In a long term, the
+0.01 e-greedy method will be more rentable than the 0.1 one, because once
+the optimal action found, he will loose a lot less actions by exploring worse
+actions.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg2">
+</a>     <center>    <img src="optimal_action.png" alt="optimal_action.png" />
+    
+<center>Figure 2: Percentage of optimal actions found for 2000 Bandits</center>
+</center>
+<div class="p"><!----></div>
+The second graph show us that a greedy method will only find the best action
+35% of the time. Quite bad for the 65% games remaining. We can also see that
+the 0.1 e-greedy method find the best action much more faster than the
+0.01 e-greedy one, which mean we have some space left for improvement:
+For example, we could start the game with a bigger rule, and reduce it after
+some time, to get the best of each e-greedy method.
+
+<div class="p"><!----></div>
+</span>
