@@ -1,4 +1,11 @@
+# Maths
 numpy
 matplotlib
+
+# Debug
 ipdb
 flake8
+
+# Tests
+unittest2
+mock
